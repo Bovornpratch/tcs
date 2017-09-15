@@ -15,10 +15,9 @@ def amcrop(time,am,cut):
     cen_in = numpy.where(numpy.amin(am) == am)
     basin_t,basin_am = time[cen_in][0],am[cen_in][0]
     lim = datetime.timedelta(minutes=cut/2.)
-    print time-basin_t
+
     index = numpy.where(numpy.absolute(time-basin_t) < lim)
-    print '--- '
-    print numpy.absolute(time-basin_t)
+
     return time[index],am[index]
 
 
@@ -26,10 +25,9 @@ def main():
     base = datetime.datetime(2017,01,01,00,00,00)
     date_list = [base + datetime.timedelta(minutes=x) for x in range(0,600)]
     zenith = numpy.absolute(numpy.linspace(-90,90,600))
-    print zenith
+
     alt = numpy.absolute(zenith - 90.)
     airmass = 1./numpy.cos(numpy.radians(zenith))
-    print airmass
 
 
     plt.plot(date_list[1:],alt[1:],color='r',label='altitude')
